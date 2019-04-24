@@ -2,6 +2,7 @@ package com.ecommerce.order.product;
 
 import com.ecommerce.order.common.utils.PagedResource;
 import com.ecommerce.order.product.representation.ProductSummaryRepresentation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,11 +14,18 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 @RequestMapping(value = "/products")
 public class ProductController {
 
+    private final ProductApplicationService productApplicationService;
+
+    @Autowired
+    public ProductController(
+        ProductApplicationService productApplicationService) {
+        this.productApplicationService = productApplicationService;
+    }
+
     @PostMapping
     @ResponseStatus(CREATED)
     public ProductId createProduct(@RequestBody @Valid CreateProductCommand command) {
-        // TODO: 创建Product
-        return null;
+        return productApplicationService.createProduct(command);
     }
 
     @GetMapping
