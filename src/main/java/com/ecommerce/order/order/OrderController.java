@@ -23,8 +23,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(CREATED)
     public OrderId createOrder(@RequestBody @Valid CreateOrderCommand command) {
-        // TODO: 创建Order
-        return null;
+        return service.createOrder(command);
     }
 
     @PostMapping("/{id}")
