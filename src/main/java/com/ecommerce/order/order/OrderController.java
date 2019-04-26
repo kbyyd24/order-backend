@@ -33,7 +33,7 @@ public class OrderController {
 
     @PostMapping("/{id}/payment")
     public void pay(@PathVariable(name = "id") String id, @RequestBody @Valid PayOrderCommand command) {
-        // TODO: 支付Order
+        service.pay(id, command);
     }
 
     @GetMapping("/{id}")

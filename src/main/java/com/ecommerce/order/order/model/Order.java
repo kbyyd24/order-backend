@@ -8,6 +8,7 @@ import static java.time.Instant.now;
 
 import com.ecommerce.order.common.ddd.AggregateRoot;
 import com.ecommerce.order.order.exception.OrderCannotBeModifiedException;
+import com.ecommerce.order.order.exception.PaidPriceNotSameWithOrderPriceException;
 import com.ecommerce.order.order.exception.ProductNotInOrderException;
 import com.ecommerce.order.product.ProductId;
 import java.math.BigDecimal;
@@ -74,5 +75,15 @@ public class Order implements AggregateRoot {
         .orElseThrow(() -> new ProductNotInOrderException(productId, id));
     orderItem.updateCount(count);
     totalPrice = this.calculateTotalPrice();
+  }
+
+  public void checkTotalPrice(BigDecimal paidPrice) {
+    if (!totalPrice.equals(paidPrice)) {
+      throw new PaidPriceNotSameWithOrderPriceException(id);
+    }
+  }
+
+  public void paid() {
+    this.status = PAID;
   }
 }
