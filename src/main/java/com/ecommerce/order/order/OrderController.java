@@ -28,7 +28,7 @@ public class OrderController {
 
     @PostMapping("/{id}")
     public void updateProductCount(@PathVariable(name = "id") String id, @RequestBody @Valid UpdateProductCountCommand command) {
-       // TODO: 更新Order中Product的数量
+       service.updateProductCount(id, command);
     }
 
     @PostMapping("/{id}/payment")
