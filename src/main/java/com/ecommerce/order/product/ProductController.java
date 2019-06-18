@@ -43,9 +43,8 @@ public class ProductController {
 
 
   @GetMapping(value = "/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
-  public Object byId(@PathVariable(name = "id") String id) {
-    // TODO: 获取单个Product详情
-    return null;
+  public Product byId(@PathVariable(name = "id") String id) {
+    return productApplicationService.byId(id);
   }
 
 }

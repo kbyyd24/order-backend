@@ -37,4 +37,8 @@ public class ProductApplicationService {
         .pagedProducts(pageIndex, pageSize);
     return productRepresentationService.toSummary(products);
   }
+
+  public Product byId(String id) {
+    return productRepository.byId(ProductId.productId(id));
+  }
 }
